@@ -1,0 +1,105 @@
+body {
+	background: linear-gradient(to bottom, #fcf4c7, var(--color-mashumaro), var(--color-sora));
+	color: var(--color-sora);
+	font-family: 'pixeBoy';
+	font-size: 1.5rem;
+}
+
+header {
+	padding: 1rem;
+}
+
+header #cyclone-studios-link {
+	display: inline-block;
+	transform-origin: top left;
+	transition: transform 88ms ease-in-out;
+}
+
+header #cyclone-studios-link:hover {
+	transform: scale(1.03);
+} 
+
+header #cyclone-studios-link:active {
+	transform: scale(1);
+}
+
+header #cyclone-studios-logo {
+	height: 88px;
+} 
+
+main {
+	padding-inline: 1rem;
+}
+
+main #sky {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+main .cloud-encapsulator {
+  aspect-ratio: 1 / 1;
+  border: 2px solid red;
+  display: grid;
+  grid-template-areas: 'mid';
+  place-items: center;
+  width: 111px;
+}
+
+main .cloud-encapsulator > * {
+	grid-area: mid;
+}
+
+main #cloud-generator-container {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+}
+
+main #cloud-select {
+	align-self: stretch;
+	background: var(--color-mashumaro);
+	border: 2px solid var(--color-sora);
+	border-radius: 100vw;
+	color: var(--color-sora);
+	padding: 0 3px;
+	text-align: center;
+}
+
+main #cloud-generate-button {	
+	background: var(--color-sora);
+	border: 2px solid var(--color-sora);
+  border-radius: 100vw;
+	color: var(--color-mashumaro);
+  padding: 3px 8px;
+  transition: all 55ms ease-in-out;
+}
+
+main #cloud-generate-button:hover {
+	opacity: 0.88;
+
+}
+
+main #cloud-generate-button:active {
+	transform: scale(0.95);
+}
+
+main .cloud-svg {
+	border: 2px solid chartreuse;
+	fill: #FFFCE8;
+	height: 100%;
+	width: 100%;
+}
+
+footer {
+	display: grid;
+	bottom: 0;
+	color: var(--color-mashumaro);
+	left: 0;
+	place-items: center;
+	position: fixed;
+	right: 0;
+	text-align: center;
+}

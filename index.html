@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CYCLONE STUDIOS</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="Page Description Here" />
+    <link rel="stylesheet" href="css/cyclone-reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/script.js" type="module" defer></script>
+  </head>
+  <body>
+    <header>
+      <a 
+				id="cyclone-studios-link" 
+				href="https://cyclonestud.io/" 
+				target="_blank" 
+				rel="noopener"
+			>
+				<img 
+					id="cyclone-studios-logo" 
+					src="assets/media/logos/images/cycloneStudios.svg" 
+					alt="Cyclone Studios™ Logo"
+				>
+			</a>
+    </header>
+    <main>
+      <section id="cloud-module">
+				<div id="cloud-generator-container">
+					<label for="cloud-select">create cloud :</label>
+					<select name="cloud-select" id="cloud-select">
+						<option value="" disabled selected>type</option>
+						<option value="cirro">cirro</option>
+						<option value="cumulo">cumulo</option>
+						<option value="nimbo">nimbo</option>
+						<option value="strato">strato</option>
+					</select>
+					<button id="cloud-generate-button">generate</button>
+				</div>
+				<div id="sky">
+					<script id="cloud-template" type="text/template">
+						{{#clouds}}
+							<div class="cloud-encapsulator">
+								<p>{{.}}</p>
+								<svg 
+									height="111px" 
+									width="111px" 
+									version="1.1" 
+									class="cloud-svg" 
+									viewBox="0 0 312.336 312.336" 
+									xml:space="preserve" 
+									xmlns="http://www.w3.org/2000/svg" 
+									xmlns:svg="http://www.w3.org/2000/svg"
+								>
+                  <g class="cloud">
+                    <path
+                      d="M169.125,285.971c-26.075,0-51.285-10.448-69.86-28.814c-6.194,2.667-12.918,4.069-19.697,4.069   c-27.418,0-49.722-22.304-49.722-49.728c0-2.93,0.28-5.901,0.829-8.873C11.391,188.359,0,165.936,0,141.829   c0-37.913,28.617-70.099,65.85-74.938c9.326-24.399,32.555-40.527,58.994-40.527c23.074,0,44.173,12.608,55.241,32.567   c7.972-2.757,16.284-4.153,24.798-4.153c41.947,0,76.072,34.119,76.072,76.06c0,1.76-0.078,3.55-0.233,5.448   c18.843,7.375,31.612,25.729,31.612,46.267c0,29.118-25.347,52.449-54.853,49.459C240.501,264.932,206.299,285.971,169.125,285.971   z"
+                      id="cloud-svg-path" 
+                    />
+                  </g>
+                </svg>
+							</div>
+						{{/clouds}}
+					</script>
+				</div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; Cyclone Studios™</p>
+    </footer>
+  </body>
+</html>
