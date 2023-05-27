@@ -25,6 +25,7 @@ import Mustache from '../node_modules/mustache/mustache.mjs';
 			this.sky.innerHTML = Mustache.render(this.cloudTemplate, data);
 		},
 		addCloud: function () {
+			if (this.cloudSelect.selectedIndex === 0) return;
 			let cloud = this.cloudSelect.selected;
 			this.clouds.push(cloud);
 			this.render();

@@ -52,6 +52,20 @@ main .cloud-encapsulator > * {
 	grid-area: mid;
 }
 
+main .cloud-encapsulator .cloud-type-p {
+	color: var(--color-sora);
+	font-size: 1.313rem;
+	z-index: 1;
+}
+
+main .cloud-svg {
+	border: 2px solid chartreuse;
+	fill: #FFFCE8;
+	height: 100%;
+	width: 100%;
+	z-index: 0;
+}
+
 main #cloud-generator-container {
 	align-items: center;
 	display: flex;
@@ -84,13 +98,6 @@ main #cloud-generate-button:hover {
 
 main #cloud-generate-button:active {
 	transform: scale(0.95);
-}
-
-main .cloud-svg {
-	border: 2px solid chartreuse;
-	fill: #FFFCE8;
-	height: 100%;
-	width: 100%;
 }
 
 footer {
