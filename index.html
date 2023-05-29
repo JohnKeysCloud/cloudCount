@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CYCLONE STUDIOS</title>
+    <title>cloudCreator</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -43,7 +43,7 @@
 					<script id="cloud-template" type="text/template">
 						{{#clouds}}
 							<div class="cloud-encapsulator">
-								<p class="cloud-type-p">{{.}}</p>
+								<p class="cloud-type-text">{{.}}</p>
 								<svg 
 									height="111px" 
 									width="111px" 
@@ -61,6 +61,7 @@
                     />
                   </g>
                 </svg>
+								<button class="cloud-dissipate-button" aria-label="Dissipate Cloud"></button>
 							</div>
 						{{/clouds}}
 					</script>
@@ -68,7 +69,7 @@
       </section>
     </main>
     <footer>
-      <p>&copy; Cyclone Studios™</p>
+      <p>&copy; Powered by Cyclone Studios™</p>
     </footer>
   </body>
 </html>

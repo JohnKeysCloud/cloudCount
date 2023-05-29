@@ -1,112 +1,235 @@
+@keyframes close-hover-one {
+  0% {
+    transform: rotate(45deg) scaleX(1) translateY(0);
+  }
+  20% {
+    transform: rotate(90deg) scaleX(0.7) translateY(-10px);
+  }
+  40% {
+    transform: rotate(180deg) scaleX(0.7) translateY(10px);
+  }
+  60% {
+    transform: rotate(270deg) scaleX(0.7) translateY(-10px);
+  }
+  80% {
+    transform: rotate(360deg) scaleX(0.7) translateY(10px);
+  }
+  100% {
+    transform: rotate(-45deg) scaleX(1) translateY(0);
+  }
+}
+
+@keyframes close-hover-two {
+  0% {
+    transform: rotate(-45deg) scaleX(1) translateY(0);
+  }
+  20% {
+    transform: rotate(-90deg) scaleX(0.7) translateY(-10px);
+  }
+  40% {
+    transform: rotate(-180deg) scaleX(0.7) translateY(10px);
+  }
+  60% {
+    transform: rotate(-270deg) scaleX(0.7) translateY(-10px);
+  }
+  80% {
+    transform: rotate(-360deg) scaleX(0.7) translateY(10px);
+  }
+  100% {
+    transform: rotate(45deg) scaleX(1) translateY(0);
+  }
+}
+
 body {
-	background: linear-gradient(to bottom, #fcf4c7, var(--color-mashumaro), var(--color-sora));
-	color: var(--color-sora);
-	font-family: 'pixeBoy';
-	font-size: 1.5rem;
+  background: linear-gradient(
+    to bottom,
+    #fcf4c7 15%,
+    var(--color-sora) 85%
+  );
+  color: var(--color-sora);
+  font-family: 'pixeBoy';
+  font-size: 1.5rem;
 }
 
 header {
-	padding: 1rem;
+  padding: 1rem;
 }
 
 header #cyclone-studios-link {
-	display: inline-block;
-	transform-origin: top left;
-	transition: transform 88ms ease-in-out;
+  display: inline-block;
+  position: relative;
+  transform-origin: top left;
+  transition: transform 88ms ease-in-out;
+  z-index: 1;
 }
 
 header #cyclone-studios-link:hover {
-	transform: scale(1.03);
-} 
+  transform: scale(1.03);
+}
 
 header #cyclone-studios-link:active {
-	transform: scale(1);
+  transform: scale(1);
 }
 
 header #cyclone-studios-logo {
-	height: 88px;
-} 
+  height: 88px;
+}
 
 main {
-	padding-inline: 1rem;
-}
-
-main #sky {
-  height: 100%;
-  inset: 0;
-  position: absolute;
-  width: 100%;
-  z-index: -1;
-}
-
-main .cloud-encapsulator {
-  aspect-ratio: 1 / 1;
-  border: 2px solid red;
-  display: grid;
-  grid-template-areas: 'mid';
-  place-items: center;
-  width: 111px;
-}
-
-main .cloud-encapsulator > * {
-	grid-area: mid;
-}
-
-main .cloud-encapsulator .cloud-type-p {
-	color: var(--color-sora);
-	font-size: 1.313rem;
-	z-index: 1;
-}
-
-main .cloud-svg {
-	border: 2px solid chartreuse;
-	fill: #FFFCE8;
-	height: 100%;
-	width: 100%;
-	z-index: 0;
+  padding-inline: 1rem;
 }
 
 main #cloud-generator-container {
-	align-items: center;
-	display: flex;
-	gap: 1rem;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-main #cloud-select {
-	align-self: stretch;
-	background: var(--color-mashumaro);
-	border: 2px solid var(--color-sora);
-	border-radius: 100vw;
-	color: var(--color-sora);
-	padding: 0 3px;
-	text-align: center;
-}
-
-main #cloud-generate-button {	
-	background: var(--color-sora);
-	border: 2px solid var(--color-sora);
+main #cloud-generator-container #cloud-select {
+  align-self: stretch;
+  background: var(--color-mashumaro);
+  border: 2px solid var(--color-sora);
   border-radius: 100vw;
-	color: var(--color-mashumaro);
+  color: var(--color-sora);
+  padding: 0 3px;
+  text-align: center;
+}
+
+main #cloud-generator-container #cloud-generate-button {
+  background: var(--color-sora);
+  border: 2px solid var(--color-sora);
+  border-radius: 100vw;
+  color: var(--color-mashumaro);
   padding: 3px 8px;
   transition: all 55ms ease-in-out;
 }
 
-main #cloud-generate-button:hover {
-	opacity: 0.88;
-
+main #cloud-generator-container #cloud-generate-button:hover {
+  opacity: 0.88;
 }
 
-main #cloud-generate-button:active {
-	transform: scale(0.95);
+main #cloud-generator-container #cloud-generate-button:active {
+  transform: scale(0.95);
+}
+
+main #sky {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+main #sky .cloud-encapsulator {
+  --_cloud-transition: all 500ms ease-in-out;
+
+  aspect-ratio: 1 / 1;
+	cursor: pointer;
+  display: grid;
+  grid-template-areas: 'mid';
+  position: relative;
+  place-items: center;
+	transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 155px;
+}
+
+main #sky .cloud-encapsulator:hover {
+  animation-play-state: paused;
+}
+
+main #sky .cloud-encapsulator > * {
+  grid-area: mid;
+}
+
+main #sky .cloud-encapsulator .cloud-svg {
+  fill: #faf2ef;
+  filter: drop-shadow(0 0 1px silver); /* silver lining 🤭 */
+  height: 100%;
+  transition: var(--_cloud-transition);
+  width: 100%;
+  z-index: 0;
+}
+
+main #sky .cloud-encapsulator:hover .cloud-svg {
+  transform: scale(1.1);
+}
+
+main #sky .cloud-encapsulator .cloud-type-text {
+  color: var(--color-sora);
+  font-size: 1rem;
+  opacity: 0;
+  transition: var(--_cloud-transition) 380ms;
+  z-index: 1;
+}
+
+main #sky .cloud-encapsulator:hover .cloud-type-text {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button {
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(0);
+  transition: 380ms transform ease-in-out, opacity 500ms ease-in-out;
+  right: 0;
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button:hover {
+  transform: scale(1) rotate(360deg);
+  transition: 380ms transform ease-in-out;
+}
+
+main #sky .cloud-encapsulator:hover .cloud-dissipate-button {
+  opacity: 1;
+  transform: scale(1);
+  transition: 380ms transform ease-in-out, opacity 500ms ease-in-out 380ms;
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button::before,
+main #sky .cloud-encapsulator .cloud-dissipate-button::after {
+  background-color: red;
+  border-radius: 100vw;
+  content: '';
+  height: 3px;
+  inset: 0;
+  margin: auto;
+  position: absolute;
+  width: 100%;
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button::before {
+  transform: rotate(45deg);
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button:hover::before {
+  animation: 3s close-hover-one ease-in-out infinite alternate;
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button::after {
+  transform: rotate(-45deg);
+}
+
+main #sky .cloud-encapsulator .cloud-dissipate-button:hover::after {
+  animation: 3s close-hover-two 380ms ease-in-out infinite alternate;
 }
 
 footer {
-	display: grid;
-	bottom: 0;
-	color: var(--color-mashumaro);
-	left: 0;
-	place-items: center;
-	position: fixed;
-	right: 0;
-	text-align: center;
+  display: grid;
+  bottom: 0;
+  color: var(--color-mashumaro);
+  left: 0;
+  place-items: center;
+  position: fixed;
+  right: 0;
+  text-align: center;
 }
