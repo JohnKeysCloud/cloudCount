@@ -52,39 +52,47 @@ body {
 }
 
 header {
-  padding: 1rem;
-}
-
-header #cyclone-studios-link {
-  display: inline-block;
-  position: relative;
-  transform-origin: top left;
-  transition: transform 88ms ease-in-out;
-  z-index: 1;
-}
-
-header #cyclone-studios-link:hover {
-  transform: scale(1.03);
-}
-
-header #cyclone-studios-link:active {
-  transform: scale(1);
+  padding-inline: 8vw;
+	padding-top: 2rem;
+	position: relative;
+	margin-bottom: 3rem;
+	z-index: 0;
 }
 
 header #cyclone-studios-logo {
-  height: 88px;
+	margin-inline: auto;
+	opacity: 0.1;
+	transition: opacity 380ms ease-in-out;
+	width: min(100vw, 888px);
 }
 
-main {
-  padding-inline: 1rem;
+body:has(main .cloud-encapsulator:hover) header #cyclone-studios-logo {
+	opacity: 0.3;
 }
 
 main #cloud-generator-container {
   align-items: center;
   display: flex;
   gap: 1rem;
+	font-size: clamp(1.313rem, 3.5vw, 1.75rem);
   position: relative;
-  z-index: 1;
+	margin-inline: auto;
+	width: max-content;
+	z-index: 2;
+}
+
+main #cloud-generator-container #cloud-select-label {
+	color: var(--color-sora);
+	font-family: 'Cyclone', monospace;
+	font-size: clamp(1.625rem, 4vw, 2.125rem);
+	letter-spacing: 1.5px;
+	padding-bottom: 5px;
+	text-shadow: 0 0px 5px black;
+}
+
+main #cloud-generator-container #cloud-select-label .cyclone-font-compliment {
+	font-family: 'Courier New', Courier, monospace;
+	vertical-align: 3px;
 }
 
 main #cloud-generator-container #cloud-select {
@@ -94,7 +102,7 @@ main #cloud-generator-container #cloud-select {
   border-radius: 100vw;
   color: var(--color-sora);
 	cursor: pointer;
-  padding: 0 3px;
+  padding-inline: 0.25em;
   text-align: center;
 }
 
@@ -123,7 +131,7 @@ main #sky {
   inset: 0;
   position: absolute;
   width: 100%;
-  z-index: 0;
+	z-index: 1;
 }
 
 main #sky .cloud-encapsulator {
@@ -184,7 +192,6 @@ main #sky .cloud-encapsulator .cloud-dissipate-button {
   transform: scale(0) rotate(0);
   transition: 380ms transform ease-in-out, opacity 500ms ease-in-out;
   right: 0;
-	z-index: 1;
 }
 
 main #sky .cloud-encapsulator:hover .cloud-dissipate-button {
