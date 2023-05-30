@@ -2,7 +2,13 @@ import Mustache from '../node_modules/mustache/mustache.mjs';
 
 (function () {
   const clouds = {
-    clouds: ['test'],
+		clouds: [],
+		counters: {
+			cirro: 0,
+			cumulo: 0,
+			nimbo: 0,
+			strato: 0,
+		},
     init: function () {
 			this.cacheDom();
 			this.bindEvents();
@@ -26,23 +32,26 @@ import Mustache from '../node_modules/mustache/mustache.mjs';
 			this.sky.innerHTML = Mustache.render(this.cloudTemplate, data);
 		},
 		addCloud: function () {
-			// ! add logic that adds number to new cloud string for removal purposes
-			// ! add logic that adds number to new cloud string for removal purposes
-			// ! add logic that adds number to new cloud string for removal purposes
-			if (this.cloudSelect.selectedIndex === 0) return alert('Every cloud needs a silver lining 💭.');
-			let cloud = this.cloudSelect.value;
+      if (this.cloudSelect.selectedIndex === 0)
+        return alert('Every cloud needs a silver lining 💭.');
+			let cloud = this.cloudSelect.value;	
+			if (this.counters.hasOwnProperty(cloud)) {
+				this.counters[cloud]++;
+				cloud = `${cloud} #${this.counters[cloud]}`;
+			} else {
+				return alert('Congratulations, you broke it 😅😒');
+			}
 			this.clouds.push(cloud);
-			this.render();
+      this.render();
 
-			this.cloudSelect.selectedIndex = 0;
-		},
+      this.cloudSelect.selectedIndex = 0;
+    },
 		dissipateCloud: function (e) {
 			if (!e.target.matches('.cloud-dissipate-button')) return;
-			alert('I\'m workin\' on it -_-');
-
-			// ! get index of cloud 
-			// this.clouds.splice(i, 1);
-			// this.render();
+			let cloudToRemove = e.target.closest('.cloud-encapsulator');
+			let cloudToRemoveIndex = Array.from(cloudToRemove.parentNode.children).indexOf(cloudToRemove);
+			this.clouds.splice(cloudToRemoveIndex, 1);
+			this.render();
 		}
 	}; 
 	
