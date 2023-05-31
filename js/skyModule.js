@@ -1,4 +1,7 @@
 import Mustache from '../node_modules/mustache/mustache.mjs';
+import { cloudCountModule } from './cloudCountModule.js';
+
+// * Revealing Module Pattern
 
 // ? skyModule
 let skyModule = (function () {
@@ -92,7 +95,7 @@ window.skyModule = skyModule; // * {2}
 ?	┌─────────────────────────────────────────────────────────────────────────────┐
 ?	│ By passing `{clouds: clouds}` as the data object, the Mustache          		│
 ?	│ rendering method knows that within the template, any occurences of      		│
-?	│ `{{clouds}}` should be replaced with teh value of the `clouds` array    		│
+?	│ `{{clouds}}` should be replaced with the value of the `clouds` array    		│
 ?	│ from the module's internal state.                                       		│
 ?	│                                                                         		│
 ?	│ The key in the data object is associated with the `{{clouds}}`          		│

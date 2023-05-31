@@ -1,9 +1,7 @@
 import Mustache from '../node_modules/mustache/mustache.mjs';
 
-// * Revealing Module Pattern
-
 // ? cloudCountModule
-let cloudCountModule = (function () {
+export let cloudCountModule = (function () {
 	let cloudCount = {};
 
 	// Cache DOM
@@ -28,7 +26,7 @@ let cloudCountModule = (function () {
 	};
 })();
 
-window.cloudCountModule = cloudCountModule; // * {2}
+// ! ---------------------------------------------------
 
 /* 
 * {1}
