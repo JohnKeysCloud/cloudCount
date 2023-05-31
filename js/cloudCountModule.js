@@ -25,9 +25,9 @@ export let cloudCountModule = (function () {
 	};
 
 	// * {2}
-	// return {
-	// 	setClouds: setClouds,
-	// };
+	// * return {
+	// * 	setClouds: setClouds,
+	// * };
 })();
 
 // ! ---------------------------------------------------
