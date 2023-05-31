@@ -8,6 +8,9 @@ export let cloudCountModule = (function () {
 	let cloudCountModuleElement = document.getElementById('cloud-count-module');
 	let cloudCountUL = cloudCountModuleElement.querySelector('#cloud-count-ul');
 	let cloudCountTemplate = cloudCountModuleElement.querySelector('#cloud-count-template').innerHTML;
+	
+	events.on('cloudsChanged', setClouds);
+	_render();
 
 	function _render() {
     let cloudCounters = Object.entries(cloudCount).map(([key, value]) => ({key,value})); // * {1}
@@ -21,9 +24,10 @@ export let cloudCountModule = (function () {
 		_render();
 	};
 
-	return {
-		setClouds: setClouds,
-	};
+	// * {2}
+	// return {
+	// 	setClouds: setClouds,
+	// };
 })();
 
 // ! ---------------------------------------------------
@@ -39,5 +43,13 @@ export let cloudCountModule = (function () {
 ?  │ properties:                                                             │
 ?  │ [{key: 'total', value: 0}, {key: 'cirro', value: 0}, {key: 'cumulo',    │
 ?  │ value: 0}, { key: 'nimbo', value: 0 }, { key: 'strato', value: 0 }];    │
+?  └─────────────────────────────────────────────────────────────────────────┘
+ */
+
+/* 
+* {2}
+?  ┌─────────────────────────────────────────────────────────────────────────┐
+?  │ this API is no longer necessary because we are using an event           │
+?  │ emitter to communicate between modules.                                 │
 ?  └─────────────────────────────────────────────────────────────────────────┘
  */

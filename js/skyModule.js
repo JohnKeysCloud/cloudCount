@@ -32,7 +32,8 @@ let skyModule = (function () {
 
   function _render() {
     sky.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
-    cloudCountModule.setClouds(counters);
+    // * cloudCountModule.setClouds(counters); // {2}
+    events.emit('cloudsChanged', counters);
   }
 
   function formCloud(value) {
@@ -86,7 +87,7 @@ let skyModule = (function () {
   };
 })();
 
-window.skyModule = skyModule; // * {2}
+window.skyModule = skyModule; // * {3}
 
 // ! ---------------------------------------------------
 
@@ -105,8 +106,26 @@ window.skyModule = skyModule; // * {2}
 ?	└─────────────────────────────────────────────────────────────────────────────┘
  */
 
+/* 
+* {2}
+?  ┌─────────────────────────────────────────────────────────────────────────┐
+?  │ this is an example of modules being tightly coupled                     │
+?  │ becuase the skyModule is calling a method on the cloudCountModule       │
+?  │ this is not ideal because it means that the skyModule is dependent on   │
+?  │ the cloudCountModule                                                    │
+?  │ if the cloudCountModule changes, the skyModule will break               │
+?  │ this is why we use an event emitter to communicate between modules      │
+?  │ the skyModule doesn't care what happens to the cloudCountModule         │
+?  │ it just needs to know when the cloudCountModule changes so that it can  │
+?  │ update the                                                              │
+?  │ DOM                                                                     │
+?  └─────────────────────────────────────────────────────────────────────────┘
+ */
+
+
+
 /*
-* {2} 
+* {3} 
 ?  ┌─────────────────────────────────────────────────────────────────────────┐
 ?  │ Module needs exposure to the global scope so that the tests can         │
 ?  │ access it                                                               │                                                                      │
