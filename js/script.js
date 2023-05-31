@@ -62,9 +62,45 @@ import Mustache from '../node_modules/mustache/mustache.mjs';
 // ! ---------------------------------------------------
 
 // * Revealing Module Pattern
+
+// ? cloudCountModule
+let cloudCountModule = (function () {
+	let cloudCount = {};
+
+	// Cache DOM
+	let cloudCountModuleElement = document.getElementById('cloud-count-module');
+	let cloudCountUL = cloudCountModuleElement.querySelector('#cloud-count-ul');
+	let cloudCountTemplate = cloudCountModuleElement.querySelector('#cloud-count-template').innerHTML;
+
+	function _render() {
+    let cloudCounters = Object.entries(cloudCount).map(([key, value]) => ({
+      key,
+      value,
+    }));
+
+    // ! RESEARCH THIS
+    console.log(cloudCounters);
+    // ! RESEARCH THIS
+
+    cloudCountUL.innerHTML = Mustache.render(cloudCountTemplate, { cloudCounters: cloudCounters });
+  }
+
+	function setClouds(counters) {
+		cloudCount = counters;
+
+		_render();
+	}
+
+	return {
+		setClouds: setClouds,
+	}
+})();
+
+// ? skyModule
 let skyModule = (function () { 
 	let clouds = [];
 	let counters = {
+		total: 0,
 		cirro: 0,
 		cumulo: 0,
 		nimbo: 0,
@@ -85,24 +121,23 @@ let skyModule = (function () {
 	_render();
 
   function _render() {
-    sky.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
+		sky.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
+		cloudCountModule.setClouds(counters);
 	};
 
 	function formCloud(value) {
+		if (typeof value !== 'string' && cloudSelect.selectedIndex === 0)
+			return alert('Every cloud needs a silver lining 💭.');
+		
     let cloudType = typeof value === 'string' ? value.toLowerCase().trim() : cloudSelect.value;
     // ? the argument would be an object if fired from click event listener
 
-    if (typeof value !== 'string' && cloudSelect.selectedIndex === 0)
-      return alert('Every cloud needs a silver lining 💭.');
+    if (!counters.hasOwnProperty(cloudType)) return alert('💭 Cloud type not found! \n(Please enter "cirro", "cumulo", "nimbo" or "strato").');
+	
+		counters[cloudType]++;
+		counters.total++;
 
-    if (counters.hasOwnProperty(cloudType)) {
-      counters[cloudType]++;
-      cloudType = `${cloudType} #${counters[cloudType]}`;
-    } else {
-      return alert('💭 Cloud type not found! \n(Please enter "cirro", "cumulo", "nimbo" or "strato").');
-    }
-
-    clouds.push(cloudType);
+		clouds.push(cloudType);
 
     _render();
 
@@ -114,8 +149,16 @@ let skyModule = (function () {
     let cloudToRemove = e.target.closest('.cloud-encapsulator');
     let cloudToRemoveIndex = Array.from(
       cloudToRemove.parentNode.children
-    ).indexOf(cloudToRemove);
-    clouds.splice(cloudToRemoveIndex, 1);
+		).indexOf(cloudToRemove);
+		let cloudTypeToDecrement = cloudToRemove.querySelector('.cloud-type-text').textContent;
+		
+		if (!counters.hasOwnProperty(cloudTypeToDecrement)) return alert('Congratulations, you broke it 😅😒');
+		
+		counters[cloudTypeToDecrement]--;
+		counters.total--;
+		
+		clouds.splice(cloudToRemoveIndex, 1);
+		
     _render();
 	};
 	
@@ -125,9 +168,9 @@ let skyModule = (function () {
 	};
 })();
 
-// ! ---------------------------------------------------
-
 window.skyModule = skyModule; // * {2}
+
+// ! ---------------------------------------------------
 
 /* 
 * {1}
@@ -143,8 +186,6 @@ window.skyModule = skyModule; // * {2}
 ?	│ 		clouds.                                                                 │
 ?	└─────────────────────────────────────────────────────────────────────────────┘
  */
-
-
 
 /*
 * {2} 
