@@ -10,9 +10,9 @@ export let cloudCountModule = (function () {
 	let cloudCountTemplate = cloudCountModuleElement.querySelector('#cloud-count-template').innerHTML;
 	
 	events.on('cloudsChanged', setClouds);
-	_render();
+	render();
 
-	function _render() {
+	function render() {
     let cloudCounters = Object.entries(cloudCount).map(([key, value]) => ({key,value})); // * {1}
 
     cloudCountUL.innerHTML = Mustache.render(cloudCountTemplate, { cloudCounters: cloudCounters });
@@ -21,14 +21,25 @@ export let cloudCountModule = (function () {
 	function setClouds(counters) {
 		cloudCount = counters;
 
-		_render();
+		render();
 	};
+
+	function destroy() {
+		cloudCountModuleElement.remove();
+		events.off('cloudsChanged', setClouds);
+	}
+
+	return {
+		destroy: destroy
+	}
 
 	// * {2}
 	// * return {
 	// * 	setClouds: setClouds,
 	// * };
 })();
+
+window.cloudCountModule = cloudCountModule; // * {3}
 
 // ! ---------------------------------------------------
 
@@ -49,7 +60,17 @@ export let cloudCountModule = (function () {
 /* 
 * {2}
 ?  ┌─────────────────────────────────────────────────────────────────────────┐
-?  │ this API is no longer necessary because we are using an event           │
+?  │ this API no longer needs exposure because we are using an event         │
 ?  │ emitter to communicate between modules.                                 │
+?  └─────────────────────────────────────────────────────────────────────────┘
+ */
+
+/*
+* {3} 
+?  ┌─────────────────────────────────────────────────────────────────────────┐
+?  │ Module needs exposure to the global scope so that the tests can         │
+?  │ access it                                                               │                                                                      │
+?  │ It is currently inaccessable because the type="module" attribute on     │
+?  │ the script tag prevents it from being exposed       										 │
 ?  └─────────────────────────────────────────────────────────────────────────┘
  */
