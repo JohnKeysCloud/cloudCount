@@ -32,8 +32,45 @@ let skyModule = (function () {
 
   function _render() {
     sky.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
+
+    // ! uncomment when ready to test
+    // _simulateWind(sky);
+
     // * cloudCountModule.setClouds(counters); // {2}
     events.emit('cloudsChanged', counters);
+  }
+
+  function _simulateWind(sky) {
+    let newCloud = sky.lastElementChild;
+
+    if (!newCloud) return;
+    let cloudState = {
+      position: newCloud.getBoundingClientRect(),
+      width: newCloud.offsetWidth,
+      height: newCloud.offsetHeight,
+    };
+    let skyDimensions = {
+      width: sky.clientWidth,
+      height: sky.clientHeight,
+    }
+
+    // ! logic here
+    // ! logic here
+    // ! logic here
+
+    window.addEventListener('resize', () => {
+      cloudState = {
+        position: newCloud.getBoundingClientRect(),
+        width: newCloud.clientWidth,
+        height: newCloud.clientHeight,
+      }
+      skyDimensions = {
+        width: sky.clientWidth,
+        Height: sky.clientHeight,
+      }
+
+      console.log(cloudState.position);
+    });
   }
 
   function formCloud(value) {

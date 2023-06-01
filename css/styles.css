@@ -1,3 +1,9 @@
+@keyframes wind {
+  to {
+    transform: translateX(100px);
+  }
+}
+
 @keyframes close-hover-one {
   0% {
     transform: rotate(45deg) scaleX(1) translateY(0);
@@ -140,8 +146,10 @@ main #sky .cloud-encapsulator {
 	cursor: pointer;
   display: grid;
   grid-template-areas: 'mid';
-  position: relative;
+  inset: 0;
+  margin: auto;
   place-items: center;
+  position: absolute;
 	transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
   width: clamp(111px, 15vw, 222px);
 }
