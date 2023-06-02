@@ -1,4 +1,4 @@
-import Mustache from '../node_modules/mustache/mustache.mjs';
+import Mustache from './mustache.mjs';
 
 // ? cloudCountModule
 export let cloudCountModule = (function () {

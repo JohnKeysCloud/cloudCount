@@ -1,4 +1,4 @@
-import Mustache from '../node_modules/mustache/mustache.mjs';
+import Mustache from './mustache.mjs';
 import { cloudCountModule } from './cloudCountModule.js';
 
 // * Revealing Module Pattern
@@ -53,8 +53,14 @@ let skyModule = (function () {
     let clientWidth = sky.clientWidth;
     let clientHeight = sky.clientHeight;
 
-    document.documentElement.style.setProperty('--client-width', `${clientWidth}px`);
-    document.documentElement.style.setProperty('--client-height', `${clientHeight}px`);
+    document.documentElement.style.setProperty(
+      '--client-width',
+      `${clientWidth}px`
+    );
+    document.documentElement.style.setProperty(
+      '--client-height',
+      `${clientHeight}px`
+    );
   }
 
   function formCloud(value) {
