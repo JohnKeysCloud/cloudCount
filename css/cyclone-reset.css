@@ -342,7 +342,12 @@ footer #cycloneStudios {
   filter: var(--cyclone-filter);
   margin-inline: auto;
   object-fit: scale-down;
+  transition: transform 380ms ease-in-out;
   width: 50px;
+}
+
+footer #cycloneStudios:hover {
+  transform: scale(1.1);
 }
 
 @media only screen and (min-width: 768px) {
