@@ -1,6 +1,21 @@
-@keyframes wind {
-  to {
-    transform: translateX(100px);
+@-webkit-keyframes x {
+  100% {
+    transform: translateX(calc(var(--client-width) - var(--cloud-size)));
+  }
+}
+@keyframes x {
+  100% {
+    transform: translateX(calc(var(--client-width) - var(--cloud-size)));
+  }
+}
+@-webkit-keyframes y {
+  100% {
+    transform: translateY(calc(var(--client-height) - var(--cloud-size)));
+  }
+}
+@keyframes y {
+  100% {
+    transform: translateY(calc(var(--client-height) - var(--cloud-size)));
   }
 }
 
@@ -44,6 +59,12 @@
   100% {
     transform: rotate(45deg) scaleX(1) translateY(0);
   }
+}
+
+:root {
+  --cloud-size: clamp(111px, 15vw, 222px);
+  --client-width: 'null';
+  --client-height: 'null';
 }
 
 body {
@@ -130,8 +151,6 @@ main #cloud-generator-container #cloud-generate-button:active {
 }
 
 main #sky {
-  display: grid;
-  place-items: center;
   height: 100%;
   inset: 0;
   position: absolute;
@@ -139,23 +158,41 @@ main #sky {
 	z-index: 1;
 }
 
+main #sky .cloud-super-encapsulator {
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  top: 0;
+  width: var(--cloud-size);
+}
+
+main #sky .x-axis {
+  animation: x 13s linear infinite alternate;
+}
+
 main #sky .cloud-encapsulator {
   --_cloud-transition: all 500ms ease-in-out;
-
+  
   aspect-ratio: 1 / 1;
 	cursor: pointer;
   display: grid;
   grid-template-areas: 'mid';
-  inset: 0;
-  margin: auto;
   place-items: center;
-  position: absolute;
+  pointer-events: all;
+  position: relative;
 	transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
-  width: clamp(111px, 15vw, 222px);
+  width: var(--cloud-size);
 }
 
-main #sky .cloud-encapsulator:hover {
+main #sky .y-axis {
+  animation: y 8s linear infinite alternate;
+}
+
+main #sky .cloud-encapsulator:hover,
+main #sky .cloud-super-encapsulator:has(.cloud-encapsulator:hover) {
   animation-play-state: paused;
+  z-index: 1;
 }
 
 main #sky .cloud-encapsulator > * {

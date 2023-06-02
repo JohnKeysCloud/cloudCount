@@ -8,10 +8,10 @@ let skyModule = (function () {
   let clouds = [];
   let counters = {
     total: 0,
-    cirro: 0,
-    cumulo: 0,
-    nimbo: 0,
-    strato: 0,
+    cirrus: 0,
+    cumulus: 0,
+    nimbus: 0,
+    stratus: 0,
   };
 
   // Cache DOM
@@ -27,50 +27,34 @@ let skyModule = (function () {
   // Bind Events
   cloudAddButton.addEventListener('click', formCloud);
   sky.addEventListener('click', dissipateCloud);
+  window.addEventListener('resize', _simulateWind);
 
   _render();
 
   function _render() {
-    sky.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
+    let newCloud;
+    if (clouds.length > 0) {
+      let tempElem = document.createElement('div');
+      for (let i = 0; i < clouds.length; i++) {
+        tempElem.innerHTML = Mustache.render(cloudTemplate, { clouds: clouds }); // * {1}
+        newCloud = tempElem.lastElementChild;
+      }
 
-    // ! uncomment when ready to test
-    // _simulateWind(sky);
+      sky.appendChild(newCloud);
 
-    // * cloudCountModule.setClouds(counters); // {2}
-    events.emit('cloudsChanged', counters);
-  }
-
-  function _simulateWind(sky) {
-    let newCloud = sky.lastElementChild;
-
-    if (!newCloud) return;
-    let cloudState = {
-      position: newCloud.getBoundingClientRect(),
-      width: newCloud.offsetWidth,
-      height: newCloud.offsetHeight,
-    };
-    let skyDimensions = {
-      width: sky.clientWidth,
-      height: sky.clientHeight,
+      _simulateWind();
     }
 
-    // ! logic here
-    // ! logic here
-    // ! logic here
+    events.emit('cloudsChanged', counters);
+    // * cloudCountModule.setClouds(counters); // {2}
+  }
 
-    window.addEventListener('resize', () => {
-      cloudState = {
-        position: newCloud.getBoundingClientRect(),
-        width: newCloud.clientWidth,
-        height: newCloud.clientHeight,
-      }
-      skyDimensions = {
-        width: sky.clientWidth,
-        Height: sky.clientHeight,
-      }
+  function _simulateWind() {
+    let clientWidth = sky.clientWidth;
+    let clientHeight = sky.clientHeight;
 
-      console.log(cloudState.position);
-    });
+    document.documentElement.style.setProperty('--client-width', `${clientWidth}px`);
+    document.documentElement.style.setProperty('--client-height', `${clientHeight}px`);
   }
 
   function formCloud(value) {
@@ -85,7 +69,7 @@ let skyModule = (function () {
 
     if (!counters.hasOwnProperty(cloudTypeToForm))
       return alert(
-        '💭 Cloud type not found! \n(Please enter "cirro", "cumulo", "nimbo" or "strato").'
+        '💭 Cloud type not found! \n(Please enter "cirrus", "cumulus", "nimbus" or "stratus").'
       );
 
     counters[cloudTypeToForm]++;
@@ -100,22 +84,24 @@ let skyModule = (function () {
 
   function dissipateCloud(e) {
     if (!e.target.matches('.cloud-dissipate-button')) return;
-    let cloudToRemove = e.target.closest('.cloud-encapsulator');
-    let cloudToRemoveIndex = Array.from(
-      cloudToRemove.parentNode.children
-    ).indexOf(cloudToRemove);
+    let cloudToDissipate = e.target.closest('.cloud-encapsulator');
+    let cloudToDissipateIndex = Array.from(
+      cloudToDissipate.parentNode.children
+    ).indexOf(cloudToDissipate);
     let cloudTypeToDissipate =
-      cloudToRemove.querySelector('.cloud-type-text').textContent;
+      cloudToDissipate.querySelector('.cloud-type-text').textContent;
 
     if (!counters.hasOwnProperty(cloudTypeToDissipate))
       return alert('Congratulations, you broke it 😅😒');
 
     counters[cloudTypeToDissipate]--;
     counters.total--;
+    events.emit('cloudsChanged', counters);
+    // * cloudCountModule.setClouds(counters); // {2}
 
-    clouds.splice(cloudToRemoveIndex, 1);
+    clouds.splice(cloudToDissipateIndex, 1);
 
-    _render();
+    cloudToDissipate.remove();
   }
 
   return {
