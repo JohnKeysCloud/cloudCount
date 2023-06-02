@@ -82,53 +82,76 @@ header {
   padding-inline: 8vw;
 	padding-top: 2rem;
 	position: relative;
+  pointer-events: none;
 	margin-bottom: 3rem;
-	z-index: 0;
+	z-index: 2;
+}
+
+body:has(main #sky .cloud-encapsulator:hover) header {
+  z-index: -1;
 }
 
 header #cyclone-studios-logo {
 	margin-inline: auto;
-	opacity: 0.1;
-	transition: opacity 380ms ease-in-out;
+	opacity: 1;
+  transform: scale(1);
+	transition: opacity 0.380ms ease-in-out, transform 8s ease-in-out;
 	width: min(100vw, 888px);
 }
 
 body:has(main .cloud-encapsulator:hover) header #cyclone-studios-logo {
 	opacity: 0.3;
+  transform: scale(0.88);
 }
 
 main #cloud-generator-container {
+  --_component-font-size: clamp(1.25rem, 3vw, 1.5rem);
+
   align-items: center;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
   position: relative;
 	margin-inline: auto;
 	width: max-content;
-	z-index: 2;
+	z-index: 1;
+}
+
+body:has(main #sky .cloud-encapsulator:hover) main #cloud-generator-container {
+  z-index: 0;
 }
 
 main #cloud-generator-container #cloud-select-label {
-	color: var(--color-sora);
+	color: black;
 	font-family: 'Cyclone', monospace;
-	font-size: clamp(1.625rem, 4vw, 2.125rem);
-	letter-spacing: 1.5px;
-	padding-bottom: 5px;
-	text-shadow: 0 0px 5px black;
+	font-size: clamp(2rem, 5vw, 2.25rem);
+  line-height: 1;
+  pointer-events: none;
+  transition: opacity 0.380ms ease-in-out;
 }
 
-main #cloud-generator-container #cloud-select-label .cyclone-font-compliment {
-	font-family: 'Courier New', Courier, monospace;
-	vertical-align: 3px;
+body:has(main .cloud-encapsulator:hover) main #cloud-generator-container #cloud-select-label {
+	opacity: 0.3;
 }
+
+main #cloud-generator-container #cloud-select-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 1rem;
+} 
 
 main #cloud-generator-container #cloud-select {
-  align-self: stretch;
   background: var(--color-mashumaro);
   border: 2px solid var(--color-sora);
   border-radius: 100vw;
   color: var(--color-sora);
+  font-size: var(--_component-font-size);
+  height: 50px;
+  line-height: 1.5;
 	cursor: pointer;
-  padding-inline: 0.25em;
+  padding: 3px 8px;
   text-align: center;
 }
 
@@ -138,6 +161,8 @@ main #cloud-generator-container #cloud-generate-button {
   border-radius: 100vw;
   color: var(--color-mashumaro);
 	cursor: pointer;
+  font-size: var(--_component-font-size);
+  height: 50px;
   padding: 3px 8px;
   transition: all 55ms ease-in-out;
 }
@@ -155,7 +180,7 @@ main #sky {
   inset: 0;
   position: absolute;
   width: 100%;
-	z-index: 1;
+	z-index: 0;
 }
 
 main #sky .cloud-super-encapsulator {
@@ -293,16 +318,18 @@ main #cloud-count-container {
   bottom: 3rem;
   color: var(--color-mashumaro);
 	line-height: 1;
-	opacity: 0.8;
+	opacity: 0.5;
 	padding: 0 1rem;
   position: absolute;
   right: 1rem;
   text-align: right;
-	transition: opacity 380ms ease-in-out;
+	transition: all 380ms ease-in-out;
+  transform-origin: bottom right;
 	z-index: 3;
 }
 
 main #cloud-count-container:hover {
+  transform: scale(1.25);
 	opacity: 1;
 } 
 

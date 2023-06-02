@@ -24,15 +24,17 @@
     <main>
       <section id="sky-module">
 				<div id="cloud-generator-container">
-					<label id="cloud-select-label" for="cloud-select">create cloud<span class="cyclone-font-compliment">:</span></label>
-					<select name="cloud-select" id="cloud-select">
-						<option value="" disabled selected>type</option>
-						<option value="cirrus">cirrus</option>
-						<option value="cumulus">cumulus</option>
-						<option value="nimbus">nimbus</option>
-						<option value="stratus">stratus</option>
-					</select>
-					<button id="cloud-generate-button">generate</button>
+					<label id="cloud-select-label" for="cloud-select">create a cloud</label>
+					<div id="cloud-select-container">
+						<select name="cloud-select" id="cloud-select">
+							<option value="" disabled selected>type</option>
+							<option value="cirrus">cirrus</option>
+							<option value="cumulus">cumulus</option>
+							<option value="nimbus">nimbus</option>
+							<option value="stratus">stratus</option>
+						</select>
+						<button id="cloud-generate-button">generate</button>
+					</div>
 				</div>
 				<div id="sky">
 					<script id="cloud-template" type="text/template">
